@@ -1,18 +1,18 @@
 import 'package:flashcards/db.dart';
 import 'package:flutter/material.dart';
 
-class CardViewWidget extends StatefulWidget {
-  const CardViewWidget(
+class CardWidget extends StatefulWidget {
+  const CardWidget(
       {super.key, required this.cardIndex, required this.collectionKey});
 
   final int cardIndex;
   final int collectionKey;
 
   @override
-  State<CardViewWidget> createState() => _CardViewWidgetState();
+  State<CardWidget> createState() => _CardWidgetState();
 }
 
-class _CardViewWidgetState extends State<CardViewWidget> {
+class _CardWidgetState extends State<CardWidget> {
   bool _showSideA = true;
 
   void _switchSide() {

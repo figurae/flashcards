@@ -1,6 +1,6 @@
 import 'package:flashcards/db.dart';
-import 'package:flashcards/screens/add_card_view_widget.dart';
-import 'package:flashcards/screens/card_view_widget.dart';
+import 'package:flashcards/screens/add_card_widget.dart';
+import 'package:flashcards/screens/card_widget.dart';
 import 'package:flutter/material.dart';
 
 class CardListWidget extends StatelessWidget {
@@ -31,7 +31,7 @@ class CardListWidget extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CardViewWidget(
+                    builder: (context) => CardWidget(
                       cardIndex: index,
                       collectionKey: collectionKey,
                     ),
@@ -45,7 +45,7 @@ class CardListWidget extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          AddCardViewWidget(collectionKey: collectionKey))),
+                          AddCardWidget(collectionKey: collectionKey))),
               child: const Text('Dodaj fiszkełe')),
         ],
       ),

@@ -2,16 +2,16 @@ import 'package:flashcards/db.dart';
 import 'package:flashcards/screens/card_list_widget.dart';
 import 'package:flutter/material.dart';
 
-class AddCardViewWidget extends StatefulWidget {
-  const AddCardViewWidget({super.key, required this.collectionKey});
+class AddCardWidget extends StatefulWidget {
+  const AddCardWidget({super.key, required this.collectionKey});
 
   final int collectionKey;
 
   @override
-  State<AddCardViewWidget> createState() => _AddCardViewWidgetState();
+  State<AddCardWidget> createState() => _AddCardWidgetState();
 }
 
-class _AddCardViewWidgetState extends State<AddCardViewWidget> {
+class _AddCardWidgetState extends State<AddCardWidget> {
   final _formKey = GlobalKey<FormState>();
 
   final sideAController = TextEditingController();
@@ -29,7 +29,7 @@ class _AddCardViewWidgetState extends State<AddCardViewWidget> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Lista fiszkełów'),
+        title: const Text('Dodej fiszkełe'),
       ),
       body: Form(
         key: _formKey,
