@@ -1,21 +1,30 @@
 import 'package:flashcards/db.dart';
 import 'package:flashcards/screens/add_collection_widget.dart';
 import 'package:flashcards/screens/card_list_widget.dart';
-import 'package:flashcards/screens/edit_card_collections_widget.dart';
 import 'package:flutter/material.dart';
 
-class CardCollectionsWidget extends StatelessWidget {
-  const CardCollectionsWidget({super.key});
+class EditCardCollectionsWidget extends StatefulWidget {
+  const EditCardCollectionsWidget({super.key});
+
+  @override
+  State<EditCardCollectionsWidget> createState() =>
+      _EditCardCollectionsWidgetState();
+}
+
+class _EditCardCollectionsWidgetState extends State<EditCardCollectionsWidget> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Zbiory fiszkełów'),
-      ),
-      body: Column(
-        children: [
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: const Text('Zbiory fiszkełów'),
+        ),
+        body: Column(children: [
           ListView.builder(
             itemCount: flashCardCollections.length,
             shrinkWrap: true,
@@ -39,14 +48,6 @@ class CardCollectionsWidget extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => const AddCollectionWidget())),
               child: const Text('Dodaj zbiór fiszkełów')),
-          ElevatedButton(
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const EditCardCollectionsWidget())),
-              child: const Text('Edytuj zbiory fiszkełów')),
-        ],
-      ),
-    );
+        ]));
   }
 }

@@ -64,6 +64,7 @@ class _AddCollectionWidgetState extends State<AddCollectionWidget> {
     final List<FlashCard> cards = [];
     final FlashCardCollection newFlashCardCollection =
         FlashCardCollection(cards: cards, name: name);
+
     await flashCardCollections.add(newFlashCardCollection);
     await flashCardCollections.flush();
   }
