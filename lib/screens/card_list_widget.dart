@@ -1,5 +1,5 @@
 import 'package:flashcards/db.dart';
-import 'package:flashcards/screens/add_card_widget.dart';
+import 'package:flashcards/screens/edit_card_widget.dart';
 import 'package:flashcards/screens/card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -38,8 +38,8 @@ class _CardListWidgetState extends State<CardListWidget> {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        AddCardWidget(collectionKey: widget.collectionKey),
+                    builder: (_) =>
+                        EditCardWidget(collectionKey: widget.collectionKey),
                   ),
                 ).then((_) => setState(() {})),
               ),
@@ -72,14 +72,10 @@ class _CardListWidgetState extends State<CardListWidget> {
               ),
             ),
             trailing: _editMode
-                ? IconButton(
-                    onPressed: () => _deleteCardDialog(
-                      cardIndex: index,
-                      collectionKey: widget.collectionKey,
-                      context: context,
-                      name: cards[index].sideAText,
-                    ),
-                    icon: const Icon(Icons.delete),
+                ? _cardTileTrailingButtons(
+                    cardIndex: index,
+                    cardTitle: cards[index].sideAText,
+                    card: cards[index],
                   )
                 : null,
           );
@@ -88,11 +84,47 @@ class _CardListWidgetState extends State<CardListWidget> {
     );
   }
 
-  Future<void> _deleteCardDialog(
-      {required int cardIndex,
-      required int collectionKey,
-      required BuildContext context,
-      required String name}) async {
+  // should this be lowerCamelCase?
+  Widget _cardTileTrailingButtons({
+    required int cardIndex,
+    required String cardTitle,
+    required FlashCard card,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => EditCardWidget(
+                collectionKey: widget.collectionKey,
+                cardIndex: cardIndex,
+                card: card,
+              ),
+            ),
+          ).then((_) => setState(() {})),
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: () => _deleteCardDialog(
+            cardIndex: cardIndex,
+            collectionKey: widget.collectionKey,
+            context: context,
+            name: cardTitle,
+          ),
+          icon: const Icon(Icons.delete),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _deleteCardDialog({
+    required int cardIndex,
+    required int collectionKey,
+    required BuildContext context,
+    required String name,
+  }) async {
     return showDialog(
       context: context,
       barrierDismissible: false,
