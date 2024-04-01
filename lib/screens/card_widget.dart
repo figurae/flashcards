@@ -2,11 +2,16 @@ import 'package:flashcards/db.dart';
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatefulWidget {
-  const CardWidget(
-      {super.key, required this.cardIndex, required this.collectionKey});
+  const CardWidget({
+    super.key,
+    required this.card,
+    required this.cardIndex,
+    required this.totalCards,
+  });
 
+  final FlashCard card;
   final int cardIndex;
-  final int collectionKey;
+  final int totalCards;
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -21,23 +26,17 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final FlashCardCollection? currentCollection =
-        flashCardCollections.get(widget.collectionKey);
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(
-              'Fiszka ${widget.cardIndex + 1} z ${currentCollection?.cards.length}'),
+          title: Text('Fiszka ${widget.cardIndex} z ${widget.totalCards}'),
         ),
         body: Column(
           children: [
             FlashCardWidget(
                 text: (_showSideA
-                        ? currentCollection?.cards[widget.cardIndex].sideAText
-                        : currentCollection
-                            ?.cards[widget.cardIndex].sideBText) ??
-                    'Brak tekstu'),
+                    ? widget.card.sideAText
+                    : widget.card.sideBText)),
             ElevatedButton(onPressed: _switchSide, child: const Text('flip')),
           ],
         ));

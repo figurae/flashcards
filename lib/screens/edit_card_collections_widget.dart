@@ -29,6 +29,13 @@ class _EditCardCollectionsWidgetState extends State<EditCardCollectionsWidget> {
           itemCount: flashCardCollections.length,
           shrinkWrap: true,
           itemBuilder: (_, index) {
+            final collectionKey = flashCardCollections.keyAt(index);
+            final collection = flashCardCollections.get(collectionKey);
+
+            if (collection == null) {
+              return const ListTile(title: Text('Nieznany zbiór'));
+            }
+
             return ListTile(
               title: Text(
                   flashCardCollections.getAt(index)?.name ?? 'Nieznany zbiór'),
@@ -36,12 +43,17 @@ class _EditCardCollectionsWidgetState extends State<EditCardCollectionsWidget> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CardListWidget(
-                      collectionKey: flashCardCollections.keyAt(index)),
+                    collection: collection,
+                    collectionKey: collectionKey,
+                  ),
                 ),
               ),
               trailing: IconButton(
-                  onPressed: () =>
-                      _deleteCollectionDialog(index: index, context: context),
+                  onPressed: () => _deleteCollectionDialog(
+                        index: index,
+                        context: context,
+                        name: collection.name,
+                      ),
                   icon: const Icon(Icons.delete)),
             );
           },
@@ -56,16 +68,18 @@ class _EditCardCollectionsWidgetState extends State<EditCardCollectionsWidget> {
     );
   }
 
-  Future<void> _deleteCollectionDialog(
-      {required int index, required BuildContext context}) async {
+  Future<void> _deleteCollectionDialog({
+    required int index,
+    required BuildContext context,
+    required String name,
+  }) async {
     return showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Potwierdź wybór'),
-            content: Text(
-                'Czy na pewno chcesz usunąć zbiór ${flashCardCollections.getAt(index)?.name ?? 'Nieznany zbiór'}'),
+            content: Text('Czy na pewno chcesz usunąć zbiór $name?'),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),

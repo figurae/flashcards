@@ -20,16 +20,27 @@ class CardCollectionsWidget extends StatelessWidget {
             itemCount: flashCardCollections.length,
             shrinkWrap: true,
             itemBuilder: (_, index) {
+              final collectionKey = flashCardCollections.keyAt(index);
+              final collection = flashCardCollections.get(collectionKey);
+
+              if (collection == null) {
+                return const ListTile(title: Text('Nieznany zbiór'));
+              }
+
               return ListTile(
                 title: Text(flashCardCollections.getAt(index)?.name ??
                     'Nieznany zbiór'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CardListWidget(
-                        collectionKey: flashCardCollections.keyAt(index)),
-                  ),
-                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CardListWidget(
+                        collection: collection,
+                        collectionKey: collectionKey,
+                      ),
+                    ),
+                  );
+                },
               );
             },
           ),

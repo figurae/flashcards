@@ -61,13 +61,7 @@ class _AddCardWidgetState extends State<AddCardWidget> {
                         sideBText: sideBController.text,
                         collectionKey: widget.collectionKey);
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CardListWidget(
-                            collectionKey: widget.collectionKey,
-                          ),
-                        ));
+                    Navigator.of(context).pop();
                   }
                 },
                 child: const Text('add'))
