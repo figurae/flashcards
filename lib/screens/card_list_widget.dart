@@ -31,29 +31,26 @@ class _CardListWidgetState extends State<CardListWidget> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text('Fiszkeły ze zbioru: $name'),
         actions: [
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
-                child: const Text('Dodaj fiszkełę'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        EditCardWidget(collectionKey: widget.collectionKey),
-                  ),
-                ).then((_) => setState(() {})),
+          IconButton(
+            tooltip: !_editMode ? 'Edytuj fiszkeły' : 'Zakończ edycję',
+            onPressed: () => setState(() {
+              _editMode = !_editMode;
+            }),
+            icon: !_editMode
+                ? const Icon(Icons.edit)
+                : const Icon(Icons.edit_off),
+          ),
+          IconButton(
+            tooltip: 'Dodej fiszkełę',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    EditCardWidget(collectionKey: widget.collectionKey),
               ),
-              PopupMenuItem(
-                  child: !_editMode
-                      ? const Text('Edytuj fiszkeły')
-                      : const Text('Zakończ edycję'),
-                  onTap: () => setState(
-                        () {
-                          _editMode = !_editMode;
-                        },
-                      ))
-            ],
-          )
+            ).then((_) => setState(() {})),
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: ListView.builder(
