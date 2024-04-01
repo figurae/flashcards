@@ -79,7 +79,7 @@ class _EditCardCollectionsWidgetState extends State<EditCardCollectionsWidget> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Potwierdź wybór'),
-            content: Text('Czy na pewno chcesz usunąć zbiór $name?'),
+            content: Text('Czy na pewno chcesz usunąć zbiór: $name?'),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),

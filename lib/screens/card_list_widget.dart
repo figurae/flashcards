@@ -1,6 +1,7 @@
 import 'package:flashcards/db.dart';
 import 'package:flashcards/screens/add_card_widget.dart';
 import 'package:flashcards/screens/card_widget.dart';
+import 'package:flashcards/screens/edit_card_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class CardListWidget extends StatefulWidget {
@@ -59,6 +60,18 @@ class _CardListWidgetState extends State<CardListWidget> {
               ),
             ).then((_) => setState(() {})),
             child: const Text('Dodaj fiszkełe'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditCardListWidget(
+                  collection: widget.collection,
+                  collectionKey: widget.collectionKey,
+                ),
+              ),
+            ),
+            child: const Text('Edytuj fiszkeły'),
           ),
         ],
       ),

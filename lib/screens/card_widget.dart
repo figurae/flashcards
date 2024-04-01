@@ -29,7 +29,7 @@ class _CardWidgetState extends State<CardWidget> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text('Fiszka ${widget.cardIndex} z ${widget.totalCards}'),
+          title: Text('Fiszka ${widget.cardIndex + 1} z ${widget.totalCards}'),
         ),
         body: Column(
           children: [

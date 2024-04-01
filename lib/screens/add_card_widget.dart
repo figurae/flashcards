@@ -1,5 +1,4 @@
 import 'package:flashcards/db.dart';
-import 'package:flashcards/screens/card_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class AddCardWidget extends StatefulWidget {
